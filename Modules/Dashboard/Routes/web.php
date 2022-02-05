@@ -14,7 +14,7 @@ use Modules\Dashboard\Http\Controllers\DashboardController;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
 

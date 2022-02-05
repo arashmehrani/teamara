@@ -14,7 +14,7 @@ use Modules\Option\Http\Controllers\OptionController;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
     Route::get('/options', [OptionController::class, 'index'])->name('options');
     Route::post('/options', [OptionController::class, 'optionsUpdate'])->name('options.update');
     Route::get('/options/status', [OptionController::class, 'status'])->name('options.status');

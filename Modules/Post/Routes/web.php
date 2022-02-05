@@ -12,6 +12,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
 
 });

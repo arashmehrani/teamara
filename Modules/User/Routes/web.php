@@ -14,7 +14,7 @@ use Modules\User\Http\Controllers\UserController;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/user/new', [UserController::class, 'new'])->name('user.new');
     Route::post('/user/new', [UserController::class, 'add'])->name('user.add');

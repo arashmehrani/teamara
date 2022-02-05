@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Http\Controllers\CoreController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['web'])->group(function () {
+
+    Route::get('/connection', [CoreController::class, 'index'])->name('connection');
 
 });

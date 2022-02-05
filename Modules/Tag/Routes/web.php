@@ -14,7 +14,7 @@ use Modules\Tag\Http\Controllers\TagController;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
     Route::get('/tags', [TagController::class, 'index'])->name('tags');
     Route::post('/tags/new', [TagController::class, 'new'])->name('tags.new');
     Route::get('/tags/edit/{id}', [TagController::class, 'edit'])->name('tags.edit');
