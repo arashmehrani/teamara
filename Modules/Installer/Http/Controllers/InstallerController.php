@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Modules\Auth\Entities\User;
+use Nwidart\Modules\Facades\Module;
 
 class InstallerController extends Controller
 {
@@ -96,7 +97,8 @@ class InstallerController extends Controller
 
     public function cancel(Request $request)
     {
-        Artisan::call('module:disable Installer');
+        $module = Module::find('installer');
+        $module->disable();
         return redirect()->route('home');
     }
 
@@ -111,7 +113,8 @@ class InstallerController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        Artisan::call('module:disable Installer');
+        $module = Module::find('installer');
+        $module->disable();
         return redirect()->route('login');
     }
 
