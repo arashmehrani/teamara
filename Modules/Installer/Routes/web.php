@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Installer\Http\Controllers\InstallerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['verified'])->prefix('dashboard')->group(function () {
+Route::middleware(['web'])->group(function () {
+
+    Route::get('/installer', [InstallerController::class, 'installer'])->name('installer');
+    Route::post('/installer-check', [InstallerController::class, 'installerCheck'])->name('installer.check');
+    Route::post('/installer-migration', [InstallerController::class, 'migration'])->name('installer.migration');
+    Route::post('/installer-cancel', [InstallerController::class, 'cancel'])->name('installer.cancel');
+    Route::post('/installer-admin', [InstallerController::class, 'admin'])->name('installer.admin');
 
 });

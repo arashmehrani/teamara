@@ -5,75 +5,130 @@ namespace Modules\Installer\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use Modules\Auth\Entities\User;
 
 class InstallerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
+    public function connection()
     {
-        return view('installer::index');
+        Artisan::call('cache:clear');
+        $check = \Illuminate\Support\Facades\DB::connection()->getDatabaseName();
+        if ($check) {
+            return redirect('/');
+        } else {
+            return view('installer::connection');
+        }
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function installer(Request $request)
     {
-        return view('installer::create');
+
+        Artisan::call('cache:clear');
+        return view('installer::installer');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function installerCheck(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'db_name' => 'required|max:190',
+            'db_username' => 'required|max:190',
+            'db_password' => 'nullable|max:190',
+            'db_host' => 'required|max:190',
+        ]);
+        $db_name = $request->db_name;
+        $db_username = $request->db_username;
+        $db_password = $request->db_password;
+        $db_host = $request->db_host;
+
+        try {
+            $con = new \PDO('mysql:host=' . $db_host . '; dbname=' . $db_name, $db_username, $db_password);
+        } catch (\PDOException $err) {
+            return redirect()->back()->with('NotConnected', 'خطا: متاسفانه ارتباط با این پایگاه داده برقرار نشد!');
+        }
+        $conn = null;
+
+        $db_name_key = 'DB_DATABASE';
+        $this->changeEnvironmentVariable($db_name_key, $db_name);
+
+        $db_username_key = 'DB_USERNAME';
+        $this->changeEnvironmentVariable($db_username_key, $db_username);
+
+        $db_password_key = 'DB_PASSWORD';
+        $this->changeEnvironmentVariable($db_password_key, $db_password);
+
+        $db_host_key = 'DB_HOST';
+        $this->changeEnvironmentVariable($db_host_key, $db_host);
+
+        Session::put('checked', 'آماده نصب سایت');
+        Session::forget('oldData');
+        Session::forget('noData');
+
+        if (Schema::hasColumn('users', 'updated_at')) {
+
+            // we have old database
+            Session::put('oldData', 'به نظر میرسد داده هایی از قبل برای این سایت وجود دارد');
+            return redirect()->route('installer', ['step' => '2']);
+
+        } else {
+
+            // database is not ours
+            Session::put('noData', 'دیتابیس خالی و آمده نصب');
+            return redirect()->route('installer', ['step' => '2']);
+
+        }
+
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    public function migration()
     {
-        return view('installer::show');
+        Session::forget('oldData');
+        Session::forget('noData');
+        Artisan::call('migrate:fresh --seed');
+        Session::put('migrated', 'جداول نصب شد');
+        return redirect()->route('installer', ['step' => '3']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
+    public function cancel(Request $request)
     {
-        return view('installer::edit');
+        return redirect()->route('home');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function admin(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|max:190|min:5|confirmed',
+        ]);
+
+        $user = User::where('email', 'admin@admin.com')->firstOrFail();
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect()->route('login');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public static function changeEnvironmentVariable($key, $value)
     {
-        //
+        $path = base_path('.env');
+
+        if (is_bool(env($key))) {
+            $old = env($key) ? 'true' : 'false';
+        } elseif (env($key) === null) {
+            $old = 'null';
+        } else {
+            $old = env($key);
+        }
+
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                "$key=" . $old, "$key=" . $value, file_get_contents($path)
+            ));
+        }
     }
 }
