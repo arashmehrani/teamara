@@ -1,0 +1,12 @@
+{
+    "Auth": true,
+    "User": true,
+    "Option": true,
+    "Core": true,
+    "Dashboard": true,
+    "Installer": true,
+    "Form": true,
+    "Tag": true,
+    "Page": true,
+    "Post": true
+}
