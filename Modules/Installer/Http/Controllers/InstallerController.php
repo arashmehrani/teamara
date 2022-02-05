@@ -90,7 +90,9 @@ class InstallerController extends Controller
     {
         Session::forget('oldData');
         Session::forget('noData');
-        Artisan::call('module:migrate-refresh --seed');
+        Artisan::call('migrate:fresh --seed');
+        Artisan::call('module:seed User');
+        Artisan::call('module:seed Option');
         Session::put('migrated', 'جداول نصب شد');
         return redirect()->route('installer', ['step' => '3']);
     }
