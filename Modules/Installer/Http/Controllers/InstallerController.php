@@ -89,13 +89,14 @@ class InstallerController extends Controller
     {
         Session::forget('oldData');
         Session::forget('noData');
-        Artisan::call('migrate:fresh --seed');
+        Artisan::call('module:migrate-refresh --seed');
         Session::put('migrated', 'جداول نصب شد');
         return redirect()->route('installer', ['step' => '3']);
     }
 
     public function cancel(Request $request)
     {
+        Artisan::call('module:disable Installer');
         return redirect()->route('home');
     }
 
@@ -106,10 +107,11 @@ class InstallerController extends Controller
             'password' => 'required|max:190|min:5|confirmed',
         ]);
 
-        $user = User::where('email', 'admin@admin.com')->firstOrFail();
+        $user = User::where('email', 'admin@admin.com')->first();
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+        Artisan::call('module:disable Installer');
         return redirect()->route('login');
     }
 
