@@ -17,12 +17,8 @@ class CheckConnection
      */
     public function handle(Request $request, Closure $next)
     {
-        try {
-            DB::connection()->getPdo();
-            if (DB::connection()->getDatabaseName()) {
-                return $next($request);
-            }
-        } catch (\Exception $e) {
+        $check = DB::connection()->getDatabaseName();
+        if ($check == null) {
             return redirect()->route('connection');
         }
 
