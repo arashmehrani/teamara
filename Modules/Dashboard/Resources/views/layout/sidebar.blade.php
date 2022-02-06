@@ -25,10 +25,22 @@
             <li class="nav-item
                 @if( route('categories') == request()->url()) active show @endif
             @if( route('tags') == request()->url()) active show @endif
+            @if( route('posts') == request()->url()) active show @endif
+            @if( route('post.new') == request()->url()) active show @endif
                 ">
                 <a class="nav-link with-sub" href="#"><span class="shape1"></span><span class="shape2"></span>
                     <i class="ti-write sidemenu-icon"></i><span class="sidemenu-label">نوشته ها</span>
                     <i class="angle fe fe-chevron-left"></i></a>
+                <ul class="nav-sub">
+                    <li class="nav-sub-item @if( route('posts') == request()->url()) active @endif">
+                        <a class="nav-sub-link" href="{{route('posts')}}">همه نوشته ها</a>
+                    </li>
+                </ul>
+                <ul class="nav-sub">
+                    <li class="nav-sub-item @if( route('post.new') == request()->url()) active @endif">
+                        <a class="nav-sub-link" href="{{route('post.new')}}">افزودن نوشته</a>
+                    </li>
+                </ul>
                 <ul class="nav-sub">
                     <li class="nav-sub-item @if( route('categories') == request()->url()) active @endif">
                         <a class="nav-sub-link" href="{{route('categories')}}">دسته بندی ها</a>
@@ -42,12 +54,12 @@
             </li>
 
             @if(Route::has('media'))
-            <li class="nav-item @if( route('media') == request()->url()) active @endif">
-                <a class="nav-link" href="{{route('media')}}"><span class="shape1"></span>
-                    <span class="shape2"></span>
-                    <i class="ti-camera sidemenu-icon"></i><span class="sidemenu-label">رسانه ها</span>
-                </a>
-            </li>
+                <li class="nav-item @if( route('media') == request()->url()) active @endif">
+                    <a class="nav-link" href="{{route('media')}}"><span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="ti-camera sidemenu-icon"></i><span class="sidemenu-label">رسانه ها</span>
+                    </a>
+                </li>
             @endif
             @if(Route::has('users'))
                 <li class="nav-item
@@ -73,6 +85,15 @@
                             <a class="nav-sub-link" href="{{route('profile.edit')}}">ویرایش حساب</a>
                         </li>
                     </ul>
+                </li>
+            @endif
+
+            @if(Route::has('plugins'))
+                <li class="nav-item @if( route('plugins') == request()->url()) active @endif">
+                    <a class="nav-link" href="{{route('plugins')}}"><span class="shape1"></span>
+                        <span class="shape2"></span>
+                        <i class="ti-plug sidemenu-icon"></i><span class="sidemenu-label">افزونه ها</span>
+                    </a>
                 </li>
             @endif
 

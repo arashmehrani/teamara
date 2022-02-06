@@ -10,5 +10,6 @@
     "Page": true,
     "Post": true,
     "Category": true,
-    "Media": true
+    "Media": true,
+    "Plugin": true
 }
