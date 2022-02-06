@@ -5,6 +5,7 @@ namespace Modules\Media\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Media\Entities\Media;
 
 class MediaController extends Controller
 {
@@ -14,7 +15,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('media::media');
+        $medias = Media::orderBy('created_at', 'desc')->paginate(10);
+        return view('media::media', compact('medias'));
     }
 
     /**
