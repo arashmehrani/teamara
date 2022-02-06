@@ -22,24 +22,33 @@
                 </a>
             </li>
 
-            @if(Route::has('categories'))
-                <li class="nav-item @if( route('categories') == request()->url()) active @endif">
-                    <a class="nav-link" href="{{route('categories')}}"><span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="si si-layers sidemenu-icon"></i><span class="sidemenu-label">دسته بندی ها</span>
-                    </a>
-                </li>
-            @endif
+            <li class="nav-item
+                @if( route('categories') == request()->url()) active show @endif
+            @if( route('tags') == request()->url()) active show @endif
+                ">
+                <a class="nav-link with-sub" href="#"><span class="shape1"></span><span class="shape2"></span>
+                    <i class="ti-write sidemenu-icon"></i><span class="sidemenu-label">نوشته ها</span>
+                    <i class="angle fe fe-chevron-left"></i></a>
+                <ul class="nav-sub">
+                    <li class="nav-sub-item @if( route('categories') == request()->url()) active @endif">
+                        <a class="nav-sub-link" href="{{route('categories')}}">دسته بندی ها</a>
+                    </li>
+                </ul>
+                <ul class="nav-sub">
+                    <li class="nav-sub-item @if( route('tags') == request()->url()) active @endif">
+                        <a class="nav-sub-link" href="{{route('tags')}}">برچسب ها</a>
+                    </li>
+                </ul>
+            </li>
 
-            @if(Route::has('tags'))
-                <li class="nav-item @if( route('tags') == request()->url()) active @endif">
-                    <a class="nav-link" href="{{route('tags')}}"><span class="shape1"></span>
-                        <span class="shape2"></span>
-                        <i class="si si-layers sidemenu-icon"></i><span class="sidemenu-label">برچسب ها</span>
-                    </a>
-                </li>
+            @if(Route::has('media'))
+            <li class="nav-item @if( route('media') == request()->url()) active @endif">
+                <a class="nav-link" href="{{route('media')}}"><span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="ti-camera sidemenu-icon"></i><span class="sidemenu-label">رسانه ها</span>
+                </a>
+            </li>
             @endif
-
             @if(Route::has('users'))
                 <li class="nav-item
                 @if( route('users') == request()->url()) active show @endif
@@ -93,6 +102,7 @@
                     </ul>
                 </li>
             @endif
+
         </ul>
     </div>
 </div>

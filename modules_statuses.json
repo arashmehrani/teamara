@@ -9,5 +9,6 @@
     "Tag": true,
     "Page": true,
     "Post": true,
-    "Category": true
+    "Category": true,
+    "Media": true
 }
