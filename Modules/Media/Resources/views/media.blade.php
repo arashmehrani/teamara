@@ -33,7 +33,7 @@
                     @endif
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{route('user.new')}}" type="button" class="btn btn-primary my-2 btn-icon-text"
+                        <a href="{{route('media.new')}}" type="button" class="btn btn-primary my-2 btn-icon-text"
                            title="افزودن رسانه جدید">
                             افزودن رسانه جدید<i class="ti-write mr-2"></i></a>
                         <div class="mr-auto float-right mt-2">

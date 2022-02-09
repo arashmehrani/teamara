@@ -25,7 +25,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('media::create');
+        return view('media::media-new');
     }
 
     /**

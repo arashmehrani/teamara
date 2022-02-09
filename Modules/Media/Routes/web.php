@@ -17,5 +17,6 @@ use Modules\Media\Http\Controllers\MediaController;
 Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
 
     Route::get('/media', [MediaController::class, 'index'])->name('media');
+    Route::get('/media/new', [MediaController::class, 'create'])->name('media.new');
 
 });
