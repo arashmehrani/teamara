@@ -8,5 +8,8 @@
     "Form": true,
     "Tag": true,
     "Page": true,
-    "Post": true
+    "Post": true,
+    "Category": true,
+    "Media": true,
+    "Plugin": true
 }

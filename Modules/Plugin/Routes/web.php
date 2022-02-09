@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Post\Http\Controllers\PostController;
+use Modules\Plugin\Http\Controllers\PluginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,5 @@ use Modules\Post\Http\Controllers\PostController;
 */
 
 Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
-
-    Route::get('/posts', [PostController::class, 'index'])->name('posts');
-    Route::get('/post/new', [PostController::class, 'new'])->name('post.new');
-
+    Route::get('/plugins', [PluginController::class, 'index'])->name('plugins');
 });

@@ -1,0 +1,23 @@
+{
+    "name": "teamara/category",
+    "description": "",
+    "authors": [
+        {
+            "name": "Teamara",
+            "email": "info@teamara.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Category\\": ""
+        }
+    }
+}

@@ -54,6 +54,8 @@ class InstallerController extends Controller
         }
         $conn = null;
 
+        Artisan::call('key:generate');
+
         $db_name_key = 'DB_DATABASE';
         $this->changeEnvironmentVariable($db_name_key, $db_name);
 
