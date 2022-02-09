@@ -18,6 +18,7 @@ class ImageFileService
         !file_exists($month_folder) && mkdir($month_folder, 0777);
         $file->move(base_path($dir), $name . '.' . $extension);
         $path = $dir . '\\' . $name . '.' . $extension;
+
     }
 
 }

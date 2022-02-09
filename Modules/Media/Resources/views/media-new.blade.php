@@ -30,7 +30,7 @@
                         </p>
                     </div>
 
-                    <form method="post" action="{{route('media.add')}}">
+                    <form method="post" action="{{route('media.add')}}" enctype="multipart/form-data">
                         <div class="row row-sm">
 
                             <div class="col-md-5">

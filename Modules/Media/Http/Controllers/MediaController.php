@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Media\Entities\Media;
+use Modules\Media\Services\MediaUploadService;
 
 class MediaController extends Controller
 {
@@ -35,7 +36,7 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MediaUploadService::upload($request->file('file'));
     }
 
     /**
