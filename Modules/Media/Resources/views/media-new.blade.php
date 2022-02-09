@@ -3,7 +3,11 @@
     <title>افزودن رسانه جدید > {{config('app.name')}}</title>
 @endsection
 @section('css')
+    <!-- InternalFileupload css-->
+    <link href="{{asset('CDN/admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 
+    <!-- InternalFancy uploader css-->
+    <link href="{{asset('CDN/admin/assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet"/>
 @endsection
 @section('breadcrumb')
     <h2 class="main-content-title tx-24 mg-b-5">افزودن رسانه جدید</h2>
@@ -26,83 +30,46 @@
                         </p>
                     </div>
 
-                    <div class="row row-sm">
-                        <div class="col-md-6">
-                            <form method="post" action="{{route('user.add')}}">
+                    <form method="post" action="{{route('media.add')}}">
+                        <div class="row row-sm">
+
+                            <div class="col-md-5">
+
+                                <input type="file" name="file" id="file" class="dropify" data-height="210">
+
+                            </div>
+                            <div class="col-md-7">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="display_name">نام :</label>
-                                    <input type="text" class="form-control" name="display_name" id="display_name"
-                                           placeholder="نام نمایشی" value="{{old('display_name','کاربر سایت')}}">
-                                    @if ($errors->has('display_name'))
+                                    <label for="name">نام فایل :</label>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                           placeholder="نام فایل ..." value="{{old('name')}}">
+                                    @if ($errors->has('name'))
                                         <p class="text-danger">
-                                            <small>{{ $errors->first('display_name') }}</small>
+                                            <small>{{ $errors->first('name') }}</small>
                                         </p>
-                                    @else
-                                        <small class="text-muted">نام نمایشی این کاربر در سایت.</small>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="mobile">موبایل :</label>
-                                    <input type="text" class="form-control" name="mobile" id="mobile"
-                                           placeholder="شماره موبایل" value="{{old('mobile')}}">
-                                    @if ($errors->has('mobile'))
+                                    <label for="description">توضیحات :</label>
+                                    <input type="text" class="form-control" name="description" id="description"
+                                           placeholder="توضیحات ..." value="{{old('description')}}">
+                                    @if ($errors->has('description'))
                                         <p class="text-danger">
-                                            <small>{{ $errors->first('mobile') }}</small>
+                                            <small>{{ $errors->first('description') }}</small>
                                         </p>
-                                    @else
-                                        <small class="text-muted">به صورت عمومی جایی نمایش داده نمی شود.</small>
                                     @endif
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">ایمیل :
-                                        <span class="tx-danger">*</span>
-                                    </label>
-                                    <input type="email" class="form-control" name="email" id="email"
-                                           placeholder="ایمیل" value="{{old('email')}}">
-                                    @if ($errors->has('email'))
-                                        <span class="text-danger">
-                                                        <small>{{ $errors->first('email') }}</small>
-                                                    </span>
-                                    @endif
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">رمز عبور :
-                                        <span class="tx-danger">*</span>
-                                    </label>
-                                    <input type="password" class="form-control" name="password" id="password"
-                                           placeholder="رمز عبور">
-                                    @if ($errors->has('password'))
-                                        <span class="text-danger">
-                                                        <small>{{ $errors->first('password') }}</small>
-                                                    </span>
-                                    @endif
-                                </div>
-                                <div class="row row-sm" data-select2-id="21">
-                                    <div class="col-sm-4" data-select2-id="20">
-                                        <label for="status">وضعیت :</label>
-                                        <select class="form-control select" name="status" id="status">
-                                            <option value="active" selected>فعال</option>
-                                            <option value="inactive">غیرفعال</option>
-                                            <option value="ban">مسدود</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mt-4">
-                                    <label class="ckbox">
-                                        <input type="checkbox" name="send_email" id="send_email">
-                                        <span class="tx-13">ارسال ایمیل تایید حساب کاربری به این کاربر جدید؟</span>
-                                    </label>
                                 </div>
 
                                 <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary my-2">افزودن کاربر جدید</button>
+                                    <button type="submit" class="btn btn-primary my-2">افزودن فایل جدید</button>
                                 </div>
 
-                            </form>
+
+                            </div>
+
                         </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
@@ -110,4 +77,12 @@
     </div>
 @endsection
 @section('javaScript')
+
+
+    <!-- Internal Fileuploads js-->
+    <script src="{{asset('CDN/admin/assets/plugins/fileuploads/js/fileupload.js')}}"></script>
+    <script src="{{asset('CDN/admin/assets/plugins/fileuploads/js/file-upload.js')}}"></script>
+
+    <script src="{{asset('CDN/admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
+    <script src="{{asset('CDN/admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
 @endsection
