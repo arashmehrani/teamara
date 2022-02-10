@@ -20,6 +20,7 @@ class MediaFileService
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
+                $media->private = true;
                 $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;

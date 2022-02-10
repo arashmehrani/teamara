@@ -25,7 +25,7 @@ class PrivateFileService
     public static function delete($media)
     {
         foreach ($media->files as $file) {
-            File::delete($file);
+            Storage::delete($file);
         }
     }
 
