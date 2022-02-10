@@ -16,7 +16,7 @@ class CreateMediaTable extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->json('files');
-            $table->enum('type', ['image', 'video', 'audio', 'zip', 'doc', 'other']);
+            $table->enum('type', ['image', 'video', 'audio', 'zip', 'doc', 'private', 'other']);
             $table->string('name');
             $table->string('title')->nullable();
             $table->string('description')->nullable();

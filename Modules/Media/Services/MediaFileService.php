@@ -12,6 +12,19 @@ class MediaFileService
     {
         $extension = strtolower($file->getClientOriginalExtension());
         $media = new Media();
+        if ($request->has('private')) {
+            $private = $request->private;
+            if ($private == true) {
+                $media->files = PrivateFileService::upload($file);
+                $media->type = 'private';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
+            }
+        }
 
         switch ($extension) {
             case 'jpg':
@@ -105,6 +118,9 @@ class MediaFileService
                 break;
             case 'video':
                 VideoFileService::delete($media);
+                break;
+            case 'private':
+                PrivateFileService::delete($media);
                 break;
             case 'other':
                 OtherFileService::delete($media);
