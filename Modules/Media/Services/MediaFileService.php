@@ -11,7 +11,13 @@ class MediaFileService
     public static function upload($file, $request)
     {
         $extension = strtolower($file->getClientOriginalExtension());
-        $media = new Media();
+        if ($request->has('id')) {
+            $id = $request->id;
+            $media = Media::findOrfail($id);
+        } else {
+            $media = new Media();
+        }
+
         if ($request->has('private')) {
             $private = $request->private;
             if ($private == true) {

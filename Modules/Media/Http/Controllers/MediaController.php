@@ -65,14 +65,19 @@ class MediaController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'file' => 'required|file|max:10240|mimes:jpg,png,jpeg,gif,zip,rar,tar,7z,doc,docx,pdf,xlsx,mp4,mkv,mov,wmv,avi,mp3,flac,wav,txt',
+            'file' => 'nullable|file|max:10240|mimes:jpg,png,jpeg,gif,zip,rar,tar,7z,doc,docx,pdf,xlsx,mp4,mkv,mov,wmv,avi,mp3,flac,wav,txt',
         ]);
         $id = $request->id;
         $media = Media::findOrfail($id);
+
+        if ($request->file){
+            MediaFileService::upload($request->file('file'), $request);
+        }
+
         $media->title = $request->title;
         $media->description = $request->description;
         $media->save();
-        return redirect()->route('media')->with('updated', 'رسانه با موفقیت بروزرسانی شد.');
+        return redirect()->back()->with('updated', 'رسانه با موفقیت بروزرسانی شد.');
     }
 
     public function delete($id)
