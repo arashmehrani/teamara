@@ -60,16 +60,26 @@
             </li>
 
             @if(Route::has('media'))
-                <li class="nav-item @if( route('media') == request()->url()) active @endif
-                @if( route('media.new') == request()->url()) active @endif
-                @if( str_starts_with(request()->url(),route('media')) ) active @endif
+                <li class="nav-item
+                @if( route('media') == request()->url()) active show @endif
+                @if( str_starts_with(request()->url(),route('media')) ) active show @endif
                     ">
-                    <a class="nav-link" href="{{route('media')}}"><span class="shape1"></span>
-                        <span class="shape2"></span>
+                    <a class="nav-link with-sub" href="#"><span class="shape1"></span><span class="shape2"></span>
                         <i class="ti-camera sidemenu-icon"></i><span class="sidemenu-label">رسانه ها</span>
-                    </a>
+                        <i class="angle fe fe-chevron-left"></i></a>
+                    <ul class="nav-sub">
+                        <li class="nav-sub-item @if( route('media') == request()->url()) active @endif">
+                            <a class="nav-sub-link" href="{{route('media')}}">مدیریت رسانه ها</a>
+                        </li>
+                    </ul>
+                    <ul class="nav-sub">
+                        <li class="nav-sub-item @if( route('media.new') == request()->url()) active @endif">
+                            <a class="nav-sub-link" href="{{route('media.new')}}">افزودن رسانه جدید</a>
+                        </li>
+                    </ul>
                 </li>
             @endif
+
             @if(Route::has('users'))
                 <li class="nav-item
                 @if( route('users') == request()->url()) active show @endif
