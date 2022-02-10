@@ -21,14 +21,29 @@
     <div class="row row-sm">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
             <div class="card custom-card">
+                <div class="card-header border-bottom-0 pb-0">
+                    @if (Session::has('updated'))
+                        <div class="alert alert-success" role="alert">
+                            <button aria-label="Close" class="close" data-dismiss="alert"
+                                    type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ Session::get('updated') }}
+                            <p class="pt-2">
+                                <a href="{{route('media')}}"> ← بازگشت به لیست رسانه ها</a>
+                            </p>
+                        </div>
+                    @endif
+                </div>
                 <div class="card-body">
 
-                    <form method="post" action="{{route('media.add')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route('media.update')}}" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" value="{{$media->id}}" name="id" id="id">
                         <div class="row row-sm">
                             <div class="col-md-12">
 
-                                <input type="file" name="file" id="file" class="dropify" required data-height="200"
+                                <input type="file" name="file" id="file" class="dropify" data-height="200"
                                        data-default-file="{{url('')}}\{{$media->files['original']}}"
                                        data-max-file-size="10M"
                                        data-allowed-file-extensions="jpg png jpeg gif zip rar tar 7z doc docx pdf xlsx mp4 mkv mov wmv avi mp3 flac wav txt">

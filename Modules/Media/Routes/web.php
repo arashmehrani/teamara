@@ -21,5 +21,6 @@ Route::middleware(['connection','verified'])->prefix('dashboard')->group(functio
     Route::post('/media/new', [MediaController::class, 'store'])->name('media.add');
     Route::delete('/media/delete/{id}', [MediaController::class, 'delete'])->name('media.delete');
     Route::get('/media/edit/{id}', [MediaController::class, 'edit'])->name('media.edit');
+    Route::post('/media/edit', [MediaController::class, 'update'])->name('media.update');
 
 });

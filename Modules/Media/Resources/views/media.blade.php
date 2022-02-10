@@ -95,6 +95,10 @@
                                         {{$media->created_at}}
                                     </td>
                                     <td>
+                                        <a href="{{url('')}}\{{$media->files['original']}}" target="_blank"
+                                           class="btn btn-sm btn-primary" title="مشاهده">
+                                            <i class="fe fe-search"></i>
+                                        </a>
                                         <a href="{{ route('media.edit', $media->id) }}" class="btn btn-sm btn-info"
                                            title="ویرایش">
                                             <i class="fe fe-edit-2"></i>
