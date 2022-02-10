@@ -62,6 +62,7 @@
             @if(Route::has('media'))
                 <li class="nav-item @if( route('media') == request()->url()) active @endif
                 @if( route('media.new') == request()->url()) active @endif
+                @if( str_starts_with(request()->url(),route('media')) ) active @endif
                     ">
                     <a class="nav-link" href="{{route('media')}}"><span class="shape1"></span>
                         <span class="shape2"></span>

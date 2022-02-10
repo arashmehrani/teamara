@@ -87,7 +87,7 @@
                                         {{$media->created_at}}
                                     </td>
                                     <td>
-                                        <a href="{{ route('user.edit', $media->id) }}" class="btn btn-sm btn-info"
+                                        <a href="{{ route('media.edit', $media->id) }}" class="btn btn-sm btn-info"
                                            title="ویرایش">
                                             <i class="fe fe-edit-2"></i>
                                         </a>
