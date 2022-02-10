@@ -62,7 +62,7 @@
                             <tr>
                                 <th class="wd-lg-8p"><span>رسانه</span></th>
                                 <th class="wd-lg-20p"><span></span></th>
-                                <th class="wd-lg-20p"><span>نویسنده</span></th>
+                                <th class="wd-lg-20p"><span>آپلود توسط</span></th>
                                 <th class="wd-lg-20p"><span>مورد استفاده</span></th>
                                 <th class="wd-lg-20p"><span>تاریخ</span></th>
                                 <th class="wd-lg-20p">مدیریت</th>
@@ -73,12 +73,12 @@
                                 <tr>
                                     <td>
                                         <img alt="آواتار" class="rounded-circle avatar-md mr-2"
-                                             src="{{asset('CDN/admin/assets/img/users')}}/{{$media->path}}">
+                                             src="{{url('')}}\{{$media->files[150]}}">
                                     </td>
                                     <td><a href="#">{{$media->path}}</a></td>
 
-                                    <td class="text-center">
-                                        <a href="#">{{$media->user_id}}</a>
+                                    <td class="">
+                                        <a href="#">{{$media->user->display_name}}</a>
                                     </td>
                                     <td>
                                         <a href="#">تست</a>
@@ -92,7 +92,7 @@
                                             <i class="fe fe-edit-2"></i>
                                         </a>
                                         <a href="" title="حذف"
-                                           onclick="event.preventDefault(); deleteItem(event,'{{ route('user.delete', $media->id) }}')"
+                                           onclick="event.preventDefault(); deleteItem(event,'{{ route('media.delete', $media->id) }}')"
                                            class="btn btn-sm btn-danger">
                                             <i class="fe fe-trash"></i>
                                         </a>

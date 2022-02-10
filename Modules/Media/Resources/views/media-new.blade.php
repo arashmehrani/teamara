@@ -3,10 +3,9 @@
     <title>افزودن رسانه جدید > {{config('app.name')}}</title>
 @endsection
 @section('css')
-    <!-- InternalFileupload css-->
-    <link href="{{asset('CDN/admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 
-    <!-- InternalFancy uploader css-->
+    <link href="{{asset('CDN/admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet"/>
+
     <link href="{{asset('CDN/admin/assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet"/>
 @endsection
 @section('breadcrumb')

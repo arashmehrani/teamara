@@ -2,6 +2,7 @@
 
 namespace Modules\Media\Services;
 
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ImageFileService
@@ -33,7 +34,7 @@ class ImageFileService
         $image = Image::make($image);
         $images['original'] = $dir . $name . '.' . $extension;
         foreach (self::$sizes as $size) {
-            $images[$size] = $dir . $name . '_' . $size . '.' . $extension;
+            $images[$size] = $dir . $name . '_' . $size . 'x' . $size . '.' . $extension;
             $image->resize($size, null, function ($aspect) {
                 $aspect->aspectRatio();
             })->save(public_path($dir) . $name . '_' . $size . 'x' . $size . '.' . $extension);
@@ -41,6 +42,13 @@ class ImageFileService
 
         return $images;
 
+    }
+
+    public static function delete($media)
+    {
+        foreach ($media->files as $file) {
+            File::delete($file);
+        }
     }
 
 }

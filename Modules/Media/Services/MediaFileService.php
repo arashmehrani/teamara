@@ -5,7 +5,7 @@ namespace Modules\Media\Services;
 use Illuminate\Support\Facades\Auth;
 use Modules\Media\Entities\Media;
 
-class MediaUploadService
+class MediaFileService
 {
 
     public static function upload($file, $request)
@@ -59,4 +59,12 @@ class MediaUploadService
         }
     }
 
+    public static function delete($media)
+    {
+        switch ($media->type) {
+            case 'image':
+                ImageFileService::delete($media);
+                break;
+        }
+    }
 }

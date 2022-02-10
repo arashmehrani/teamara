@@ -4,9 +4,10 @@ namespace Modules\Media\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Media\Entities\Media;
-use Modules\Media\Services\MediaUploadService;
+use Modules\Media\Services\MediaFileService;
 
 class MediaController extends Controller
 {
@@ -29,54 +30,36 @@ class MediaController extends Controller
         return view('media::media-new');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
+
     public function store(Request $request)
     {
-        MediaUploadService::upload($request->file('file'), $request);
+        MediaFileService::upload($request->file('file'), $request);
+
+        return redirect()->route('media')->with('added', 'فایل ارسالی با موفقیت بارگذاری شد.');
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function show($id)
     {
         return view('media::show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
+
     public function edit($id)
     {
         return view('media::edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $media = Media::findOrfail($id);
+        MediaFileService::delete($media);
+        $media->delete();
+        return response()->json(['message' => 'فایل مورد نظر با موفقیت حذف شد!'], Response::HTTP_OK);
     }
 }
