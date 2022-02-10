@@ -72,8 +72,16 @@
                             @foreach($medias as $media)
                                 <tr>
                                     <td>
-                                        <img alt="آواتار" class="rounded-circle avatar-md mr-2"
-                                             src="{{url('')}}\{{$media->files[150]}}">
+                                        <img alt="فایل" class="rounded avatar-md mr-2"
+                                             src="
+                                             @if($media->type == 'image') {{url('')}}\{{$media->files[150]}} @endif
+                                             @if($media->type == 'doc') {{asset('CDN/admin/assets/img/extension/icon-document.png')}} @endif
+                                             @if($media->type == 'video') {{asset('CDN/admin/assets/img/extension/icon-video.png')}} @endif
+                                             @if($media->type == 'audio') {{asset('CDN/admin/assets/img/extension/icon-audio.png')}} @endif
+                                             @if($media->type == 'zip') {{asset('CDN/admin/assets/img/extension/icon-zip.png')}} @endif
+                                             @if($media->type == 'other') {{asset('CDN/admin/assets/img/extension/icon-other.png')}} @endif
+                                                 ">
+                                        {{$media->name}}
                                     </td>
                                     <td><a href="#">{{$media->path}}</a></td>
 

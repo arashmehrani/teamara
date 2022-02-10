@@ -34,7 +34,7 @@ class MediaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'file' => 'required|file|max:10240|mimes:jpg,png,jpeg,gif,zip,rar,tar,7z,doc,docx,pdf,xlsx,mp4,mkv,mov,wmv,avi,mp3,flac,wav',
+            'file' => 'required|file|max:10240|mimes:jpg,png,jpeg,gif,zip,rar,tar,7z,doc,docx,pdf,xlsx,mp4,mkv,mov,wmv,avi,mp3,flac,wav,txt',
         ]);
         MediaFileService::upload($request->file('file'), $request);
 

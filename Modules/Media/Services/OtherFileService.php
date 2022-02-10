@@ -4,14 +4,14 @@ namespace Modules\Media\Services;
 
 use Illuminate\Support\Facades\File;
 
-class DocFileService
+class OtherFileService
 {
 
     public static function upload($file)
     {
         $name = $file->getClientOriginalName() . '_' . uniqid();
         $extension = $file->getClientOriginalExtension();
-        $dir = 'uploads\docs\\';
+        $dir = 'uploads\downloads\\';
         $year_folder = $dir . date("Y");
         $month_folder = $year_folder . '\\' . date("m") . '\\';
         $dir = $month_folder;

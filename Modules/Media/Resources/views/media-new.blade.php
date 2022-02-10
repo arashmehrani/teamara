@@ -36,7 +36,7 @@
 
                                 <input type="file" name="file" id="file" class="dropify" required data-height="200"
                                        data-max-file-size="10M"
-                                       data-allowed-file-extensions="jpg png jpeg gif zip rar tar 7z doc docx pdf xlsx mp4 mkv mov wmv avi mp3 flac wav">
+                                       data-allowed-file-extensions="jpg png jpeg gif zip rar tar 7z doc docx pdf xlsx mp4 mkv mov wmv avi mp3 flac wav txt">
 
                                 @if ($errors->has('file'))
                                     <p class="text-danger">

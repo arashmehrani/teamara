@@ -11,13 +11,13 @@ class MediaFileService
     public static function upload($file, $request)
     {
         $extension = strtolower($file->getClientOriginalExtension());
+        $media = new Media();
 
         switch ($extension) {
             case 'jpg':
             case 'png':
             case 'jpeg':
             case 'gif':
-                $media = new Media();
                 $media->files = ImageFileService::upload($file);
                 $media->type = 'image';
                 $media->title = $request->title;
@@ -32,14 +32,29 @@ class MediaFileService
             case 'rar':
             case 'tar':
             case '7z':
-                ZipFileService::upload($file);
+                $media->files = ZipFileService::upload($file);
+                $media->type = 'zip';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
                 break;
 
             case 'doc':
             case 'docx':
             case 'pdf':
             case 'xlsx':
-                DocFileService::upload($file);
+            case 'txt':
+                $media->files = DocFileService::upload($file);
+                $media->type = 'doc';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
                 break;
 
             case 'mp4':
@@ -47,13 +62,27 @@ class MediaFileService
             case 'mov':
             case 'wmv':
             case 'avi':
-                VideoFileService::upload($file);
+                $media->files = VideoFileService::upload($file);
+                $media->type = 'video';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
                 break;
 
             case 'mp3':
             case 'flac':
             case 'wav':
-                AudioFileService::upload($file);
+                $media->files = AudioFileService::upload($file);
+                $media->type = 'audio';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
                 break;
 
         }
@@ -64,6 +93,21 @@ class MediaFileService
         switch ($media->type) {
             case 'image':
                 ImageFileService::delete($media);
+                break;
+            case 'zip':
+                ZipFileService::delete($media);
+                break;
+            case 'doc':
+                DocFileService::delete($media);
+                break;
+            case 'audio':
+                AudioFileService::delete($media);
+                break;
+            case 'video':
+                VideoFileService::delete($media);
+                break;
+            case 'other':
+                OtherFileService::delete($media);
                 break;
         }
     }
