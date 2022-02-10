@@ -15,9 +15,17 @@ class MediaController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $medias = Media::orderBy('created_at', 'desc')->paginate(10);
+        if ($request->get('search')) {
+            $search = $request->get('search');
+            $medias = Media::where('name', 'like', '%' . $search . '%')
+                ->orWhere('title', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
         return view('media::media', compact('medias'));
     }
 

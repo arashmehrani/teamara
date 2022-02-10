@@ -11,11 +11,20 @@ use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $tags = Tag::where('type', null)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+        if ($request->get('search')) {
+            $search = $request->get('search');
+            $tags = Tag::where('type', null)
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('slug', 'like', '%' . $search . '%')
+                ->orWhere('meta_desc', 'like', '%' . $search . '%')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
         return view('tag::tags', compact('tags'));
     }
 

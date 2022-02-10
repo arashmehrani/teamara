@@ -41,7 +41,7 @@
                                 <div class="input-group">
                                     <input class="form-control" placeholder="جستجو ..." type="text" name="search"
                                            id="search"
-                                           value="@if(Request::get('search')) {{Request::get('search')}} @endif">
+                                           value="@if(Request::get('search')){{Request::get('search')}}@endif">
                                     <span class="input-group-btn">
                                     <button class="btn ripple btn-primary" type="submit" title="جستجوی رسانه ...">
 													<span class="input-group-btn">
