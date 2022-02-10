@@ -2,10 +2,13 @@
 
 namespace Modules\Media\Services;
 
+use Illuminate\Support\Facades\Auth;
+use Modules\Media\Entities\Media;
+
 class MediaUploadService
 {
 
-    public static function upload($file)
+    public static function upload($file, $request)
     {
         $extension = strtolower($file->getClientOriginalExtension());
 
@@ -14,7 +17,15 @@ class MediaUploadService
             case 'png':
             case 'jpeg':
             case 'gif':
-                ImageFileService::upload($file);
+                $media = new Media();
+                $media->files = ImageFileService::upload($file);
+                $media->type = 'image';
+                $media->title = $request->title;
+                $media->description = $request->description;
+                $media->user_id = Auth::id();
+                $media->name = $file->getClientOriginalName();
+                $media->save();
+                return $media;
                 break;
 
             case 'zip':

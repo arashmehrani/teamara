@@ -9,4 +9,7 @@ class Media extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'files' => 'json'
+    ];
 }

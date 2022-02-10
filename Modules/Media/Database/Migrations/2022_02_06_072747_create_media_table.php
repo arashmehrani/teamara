@@ -17,7 +17,8 @@ class CreateMediaTable extends Migration
             $table->id();
             $table->json('files');
             $table->enum('type', ['image', 'video', 'audio', 'zip', 'doc']);
-            $table->string('name')->nullable();
+            $table->string('name');
+            $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();

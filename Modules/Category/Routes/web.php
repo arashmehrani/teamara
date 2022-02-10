@@ -16,7 +16,7 @@ use Modules\Category\Http\Controllers\CategoryController;
 
 Route::middleware(['connection', 'verified'])->prefix('dashboard')->group(function () {
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/category', [CategoryController::class, 'index'])->name('categories');
     Route::post('/category/new', [CategoryController::class, 'new'])->name('category.new');
     Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');

@@ -24,7 +24,9 @@
 
             <li class="nav-item
                 @if( route('categories') == request()->url()) active show @endif
+            @if( str_starts_with(request()->url(),route('categories')) ) active show @endif
             @if( route('tags') == request()->url()) active show @endif
+            @if( str_starts_with(request()->url(),route('tags')) ) active show @endif
             @if( route('posts') == request()->url()) active show @endif
             @if( route('post.new') == request()->url()) active show @endif
                 ">
@@ -42,12 +44,16 @@
                     </li>
                 </ul>
                 <ul class="nav-sub">
-                    <li class="nav-sub-item @if( route('categories') == request()->url()) active @endif">
+                    <li class="nav-sub-item @if( route('categories') == request()->url()) active @endif
+                    @if( str_starts_with(request()->url(),route('categories')) ) active @endif
+                        ">
                         <a class="nav-sub-link" href="{{route('categories')}}">دسته بندی ها</a>
                     </li>
                 </ul>
                 <ul class="nav-sub">
-                    <li class="nav-sub-item @if( route('tags') == request()->url()) active @endif">
+                    <li class="nav-sub-item @if( route('tags') == request()->url()) active @endif
+                    @if( str_starts_with(request()->url(),route('tags')) ) active @endif
+                        ">
                         <a class="nav-sub-link" href="{{route('tags')}}">برچسب ها</a>
                     </li>
                 </ul>
@@ -68,12 +74,15 @@
                 @if( route('users') == request()->url()) active show @endif
                 @if( route('user.new') == request()->url()) active show @endif
                 @if( route('profile.edit') == request()->url()) active show @endif
+                @if( str_starts_with(request()->url(),route('users')) ) active show @endif
                     ">
                     <a class="nav-link with-sub" href="#"><span class="shape1"></span><span class="shape2"></span>
                         <i class="si si-people sidemenu-icon"></i><span class="sidemenu-label">کاربران</span>
                         <i class="angle fe fe-chevron-left"></i></a>
                     <ul class="nav-sub">
-                        <li class="nav-sub-item @if( route('users') == request()->url()) active @endif">
+                        <li class="nav-sub-item @if( route('users') == request()->url()) active @endif
+                        @if( str_starts_with(request()->url(),route('users')) ) active @endif
+                            ">
                             <a class="nav-sub-link" href="{{route('users')}}">مدیریت کاربران</a>
                         </li>
                     </ul>

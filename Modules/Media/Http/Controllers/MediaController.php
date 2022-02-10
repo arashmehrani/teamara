@@ -36,7 +36,7 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        MediaUploadService::upload($request->file('file'));
+        MediaUploadService::upload($request->file('file'), $request);
     }
 
     /**

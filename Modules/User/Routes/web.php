@@ -18,7 +18,7 @@ Route::middleware(['connection','verified'])->prefix('dashboard')->group(functio
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/user/new', [UserController::class, 'new'])->name('user.new');
     Route::post('/user/new', [UserController::class, 'add'])->name('user.add');
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/edit', [UserController::class, 'update'])->name('user.update');
     Route::get('/profile/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
     Route::post('/profile/edit', [UserController::class, 'profileUpdate'])->name('profile.update');

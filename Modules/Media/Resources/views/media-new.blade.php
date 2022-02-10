@@ -41,12 +41,12 @@
                             <div class="col-md-7">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="name">نام فایل :</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                           placeholder="نام فایل ..." value="{{old('name')}}">
-                                    @if ($errors->has('name'))
+                                    <label for="title">عنوان فایل :</label>
+                                    <input type="text" class="form-control" name="title" id="title"
+                                           placeholder="عنوان فایل ..." value="{{old('title')}}">
+                                    @if ($errors->has('title'))
                                         <p class="text-danger">
-                                            <small>{{ $errors->first('name') }}</small>
+                                            <small>{{ $errors->first('title') }}</small>
                                         </p>
                                     @endif
                                 </div>
