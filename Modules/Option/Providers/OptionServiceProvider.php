@@ -32,27 +32,22 @@ class OptionServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
-        if (Schema::hasColumn('options', 'option_name')) {
-
-            $admin_email = Option::where('option_name', 'admin_email')->first();
-            $mailserver_url = Option::where('option_name', 'mailserver_url')->first();
-            $mailserver_login = Option::where('option_name', 'mailserver_login')->first();
-            $mailserver_pass = Option::where('option_name', 'mailserver_pass')->first();
-            $mailserver_port = Option::where('option_name', 'mailserver_port')->first();
-            $mailserver_encryption = Option::where('option_name', 'mailserver_encryption')->first();
-            $site_name = Option::where('option_name', 'site_name')->first();
+        if (Schema::hasTable('options')) {
+            $app_general = Option::where('name', 'app_general')->first();
+            $site_name = $app_general->meta['site_name'];
 
             if (isset($site_name)) {
-                Config::set('app.name', $site_name->option_value);
+                $app_email = Option::where('name', 'app_email')->first();
+                Config::set('app.name', $site_name);
 
                 $config = [
                     'driver' => 'smtp',
-                    'host' => $mailserver_url->option_value,
-                    'port' => $mailserver_port->option_value,
-                    'username' => $mailserver_login->option_value,
-                    'password' => $mailserver_pass->option_value,
-                    'encryption' => $mailserver_encryption->option_value,
-                    'from' => array('address' => $admin_email->option_value, 'name' => $site_name->option_value),
+                    'host' => $app_email->meta['mailserver_url'],
+                    'port' => $app_email->meta['mailserver_port'],
+                    'username' => $app_email->meta['mailserver_login'],
+                    'password' => $app_email->meta['mailserver_pass'],
+                    'encryption' => $app_email->meta['mailserver_encryption'],
+                    'from' => array('address' => $app_email->meta['admin_email'], 'name' => $site_name),
                     'sendmail' => '/usr/sbin/sendmail -bs',
                     'pretend' => false,
                 ];
