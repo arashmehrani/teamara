@@ -78,7 +78,7 @@
 
                                 <div class="form-group">
                                     <label for="mailserver_pass">رمزعبور ایمیل :</label>
-                                    <input type="password" class="form-control" name="mailserver_pass"
+                                    <input type="text" class="form-control" name="mailserver_pass"
                                            id="mailserver_pass"
                                            placeholder="رمزعبور ایمیل"
                                            value="{{ old('mailserver_pass',$app_email->meta['mailserver_pass']) }}">
