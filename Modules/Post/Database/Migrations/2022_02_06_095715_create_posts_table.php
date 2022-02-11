@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration
             $table->string('comment_status')->nullable();
             $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('set null')

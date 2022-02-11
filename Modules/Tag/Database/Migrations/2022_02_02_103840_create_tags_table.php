@@ -19,6 +19,7 @@ class CreateTagsTable extends Migration
             $table->string('slug')->unique();
             $table->text('meta_desc')->nullable();
             $table->string('type')->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }

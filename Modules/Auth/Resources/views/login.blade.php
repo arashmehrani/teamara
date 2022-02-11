@@ -120,7 +120,7 @@
                                             <div class="mb-1"><a href="{{route('password.request')}}">رمز عبور خود را
                                                     فراموش کرده اید؟</a>
                                             </div>
-                                            @if($users_can_register->option_value == '1')
+                                            @if($users_can_register == '1')
                                                 <div>حساب ندارید؟ <a href="{{route('register')}}">اینجا ثبت نام
                                                         کنید</a>
                                                 </div>

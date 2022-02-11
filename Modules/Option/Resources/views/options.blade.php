@@ -39,7 +39,7 @@
                                     <label for="site_name">عنوان سایت :</label>
                                     <input type="text" class="form-control" name="site_name" id="site_name"
                                            placeholder="عنوان سایت"
-                                           value="{{ old('site_name',$site_name->option_value) }}">
+                                           value="{{ old('site_name',$app_general->meta['site_name']) }}">
                                     @if ($errors->has('site_name'))
                                         <p class="text-danger">
                                             <small>{{ $errors->first('site_name') }}</small>
@@ -53,7 +53,7 @@
                                     <input type="text" class="form-control" name="site_description"
                                            id="site_description"
                                            placeholder="معرفی کوتاه"
-                                           value="{{old('site_description',$site_description->option_value)}}">
+                                           value="{{old('site_description',$app_general->meta['site_description'])}}">
                                     @if ($errors->has('site_description'))
                                         <p class="text-danger">
                                             <small>{{ $errors->first('site_description') }}</small>
@@ -67,7 +67,7 @@
                                     <label for="post_permalink">پیشوند آدرس مطالب :</label>
                                     <input type="text" class="form-control" name="post_permalink" id="post_permalink"
                                            placeholder="پیشوند آدرس مطالب"
-                                           value="{{ old('post_permalink',$post_permalink->option_value) }}">
+                                           value="{{ old('post_permalink',$app_permalink->meta['post_permalink']) }}">
                                     @if ($errors->has('post_permalink'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('post_permalink') }}</small>
@@ -83,7 +83,7 @@
                                     <input type="text" class="form-control" name="category_permalink"
                                            id="category_permalink"
                                            placeholder="پیشوند آدرس دسته بندی ها"
-                                           value="{{ old('category_permalink',$category_permalink->option_value) }}">
+                                           value="{{ old('category_permalink',$app_permalink->meta['category_permalink']) }}">
                                     @if ($errors->has('category_permalink'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('category_permalink') }}</small>
@@ -97,7 +97,7 @@
                                     <label for="posts_per_page">تعداد پست ها در هر صفحه :</label>
                                     <input type="number" class="form-control" name="posts_per_page" id="posts_per_page"
                                            placeholder="تعداد پست ها در هر صفحه"
-                                           value="{{ old('posts_per_page',$posts_per_page->option_value) }}">
+                                           value="{{ old('posts_per_page',$app_option->meta['posts_per_page']) }}">
                                     @if ($errors->has('posts_per_page'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('posts_per_page') }}</small>
@@ -120,7 +120,7 @@
                                     <label for="users_can_register">ثبت نام :</label>
                                     <label class="ckbox">
                                         <input type="checkbox" name="users_can_register" id="users_can_register"
-                                               @if($users_can_register->option_value == '1') checked @endif>
+                                               @if($app_option->meta['users_can_register'] == '1') checked @endif>
                                         <span class="tx-13">هر کسی می تواند ثبت نام کند</span>
                                     </label>
                                 </div>
@@ -129,14 +129,14 @@
                                     <label>ثبت نظر :</label>
                                     <label class="ckbox">
                                         <input type="checkbox" name="users_can_comment" id="users_can_comment"
-                                               @if($users_can_comment->option_value == '1') checked @endif>
+                                               @if($app_option->meta['users_can_comment'] == '1') checked @endif>
                                         <span class="tx-13">قسمت نظرات فعال باشد</span>
                                     </label>
                                 </div>
                                 <div class="form-group mt-4">
                                     <label class="ckbox">
                                         <input type="checkbox" name="comment_registration" id="comment_registration"
-                                               @if($comment_registration->option_value == '1') checked @endif>
+                                               @if($app_option->meta['comment_registration'] == '1') checked @endif>
                                         <span class="tx-13">تنها کاربران ثبت نام شده امکان ثبت نظر داشته باشند</span>
                                     </label>
                                     @if ($errors->has('comment_registration'))

@@ -22,6 +22,7 @@ class CreateMediaTable extends Migration
             $table->string('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('private')->default(false)->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('set null')

@@ -23,9 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('status')->nullable();
             $table->string('display_name')->default('کاربر سایت');
             $table->string('pic')->default('user-default.png');
-            $table->integer('sms_code')->nullable();
-            $table->timestamp('sms_last')->nullable();
-            $table->unsignedInteger('sms_count')->nullable();
+            $table->integer('code')->nullable();
+            $table->json('sms_list')->nullable();
+            $table->json('meta')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

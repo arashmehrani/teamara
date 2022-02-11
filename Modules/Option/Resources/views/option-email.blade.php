@@ -40,7 +40,7 @@
                                     <label for="admin_email">ایمیل سایت :</label>
                                     <input type="text" class="form-control" name="admin_email" id="admin_email"
                                            placeholder="ایمیل سایت"
-                                           value="{{ old('admin_email',$admin_email->option_value) }}">
+                                           value="{{ old('admin_email',$app_email->meta['admin_email'] ) }}">
                                     @if ($errors->has('admin_email'))
                                         <p class="text-danger">
                                             <small>{{ $errors->first('admin_email') }}</small>
@@ -53,7 +53,7 @@
                                     <label for="mailserver_url">سرور ایمیل :</label>
                                     <input type="text" class="form-control" name="mailserver_url" id="mailserver_url"
                                            placeholder="سرور ایمیل"
-                                           value="{{ old('mailserver_url',$mailserver_url->option_value) }}">
+                                           value="{{ old('mailserver_url',$app_email->meta['mailserver_url']) }}">
                                     @if ($errors->has('mailserver_url'))
                                         <p class="text-danger">
                                             <small>{{ $errors->first('mailserver_url') }}</small>
@@ -68,7 +68,7 @@
                                     <input type="text" class="form-control" name="mailserver_login"
                                            id="mailserver_login"
                                            placeholder="نام کاربری ایمیل"
-                                           value="{{ old('mailserver_login',$mailserver_login->option_value) }}">
+                                           value="{{ old('mailserver_login',$app_email->meta['mailserver_login']) }}">
                                     @if ($errors->has('mailserver_login'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('mailserver_login') }}</small>
@@ -81,7 +81,7 @@
                                     <input type="password" class="form-control" name="mailserver_pass"
                                            id="mailserver_pass"
                                            placeholder="رمزعبور ایمیل"
-                                           value="{{ old('mailserver_pass',$mailserver_pass->option_value) }}">
+                                           value="{{ old('mailserver_pass',$app_email->meta['mailserver_pass']) }}">
                                     @if ($errors->has('mailserver_pass'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('mailserver_pass') }}</small>
@@ -93,7 +93,7 @@
                                     <input type="number" class="form-control" name="mailserver_port"
                                            id="mailserver_port"
                                            placeholder="پورت سرور ایمیل"
-                                           value="{{ old('mailserver_port',$mailserver_port->option_value) }}">
+                                           value="{{ old('mailserver_port',$app_email->meta['mailserver_port']) }}">
                                     @if ($errors->has('mailserver_port'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('mailserver_port') }}</small>
@@ -105,7 +105,7 @@
                                     <input type="text" class="form-control" name="mailserver_encryption"
                                            id="mailserver_encryption"
                                            placeholder="پروتکل رمزنگاری ایمیل"
-                                           value="{{ old('mailserver_encryption',$mailserver_encryption->option_value) }}">
+                                           value="{{ old('mailserver_encryption',$app_email->meta['mailserver_encryption']) }}">
                                     @if ($errors->has('mailserver_encryption'))
                                         <span class="text-danger">
                                                         <small>{{ $errors->first('mailserver_encryption') }}</small>

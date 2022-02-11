@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('type')->nullable();
             $table->text('meta_desc')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('categories')
                 ->onDelete('set null')

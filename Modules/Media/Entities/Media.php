@@ -11,7 +11,8 @@ class Media extends Model
     use HasFactory;
 
     protected $casts = [
-        'files' => 'json'
+        'files' => 'json',
+        'meta' => 'json'
     ];
 
     public function user()

@@ -13,18 +13,10 @@ class OptionController extends Controller
 {
     public function index()
     {
-        $site_name = Option::where('option_name', 'site_name')->first();
-        $site_description = Option::where('option_name', 'site_description')->first();
-        $post_permalink = Option::where('option_name', 'post_permalink')->first();
-        $category_permalink = Option::where('option_name', 'category_permalink')->first();
-        $posts_per_page = Option::where('option_name', 'posts_per_page')->first();
-        $users_can_register = Option::where('option_name', 'users_can_register')->first();
-        $users_can_comment = Option::where('option_name', 'users_can_comment')->first();
-        $comment_registration = Option::where('option_name', 'comment_registration')->first();
-
-        return view('option::options', compact('site_name', 'site_description'
-            , 'post_permalink', 'category_permalink', 'posts_per_page', 'users_can_register', 'users_can_comment'
-            , 'comment_registration'));
+        $app_general = Option::where('name', 'app_general')->first();
+        $app_permalink = Option::where('name', 'app_permalink')->first();
+        $app_option = Option::where('name', 'app_option')->first();
+        return view('option::options', compact('app_general', 'app_permalink', 'app_option'));
     }
 
     public function status()
@@ -46,15 +38,9 @@ class OptionController extends Controller
 
     public function email()
     {
-        $admin_email = Option::where('option_name', 'admin_email')->first();
-        $mailserver_url = Option::where('option_name', 'mailserver_url')->first();
-        $mailserver_login = Option::where('option_name', 'mailserver_login')->first();
-        $mailserver_pass = Option::where('option_name', 'mailserver_pass')->first();
-        $mailserver_port = Option::where('option_name', 'mailserver_port')->first();
-        $mailserver_encryption = Option::where('option_name', 'mailserver_encryption')->first();
+        $app_email = Option::where('name', 'app_email')->first();
 
-        return view('option::option-email', compact('admin_email', 'mailserver_url'
-            , 'mailserver_login', 'mailserver_pass', 'mailserver_port', 'mailserver_encryption'));
+        return view('option::option-email', compact('app_email'));
     }
 
     public function optionsUpdate(Request $request)
@@ -67,54 +53,50 @@ class OptionController extends Controller
             'posts_per_page' => 'required|numeric',
         ]);
 
-        $site_name = Option::where('option_name', 'site_name')->first();
-        $site_name->option_value = $request->site_name;
-        $site_name->save();
+        DB::table('options')->where('name', 'app_general')
+            ->update(
+                [
+                    'meta->site_name' => $request->site_name,
+                    'meta->site_description' => $request->site_description,
+                ]
+            );
 
-        $site_description = Option::where('option_name', 'site_description')->first();
-        $site_description->option_value = $request->site_description;
-        $site_description->save();
+        DB::table('options')->where('name', 'app_permalink')
+            ->update(
+                [
+                    'meta->post_permalink' => $request->post_permalink,
+                    'meta->category_permalink' => $request->category_permalink,
+                ]
+            );
 
-        $post_permalink = Option::where('option_name', 'post_permalink')->first();
-        $post_permalink->option_value = $request->post_permalink;
-        $post_permalink->save();
 
-        $category_permalink = Option::where('option_name', 'category_permalink')->first();
-        $category_permalink->option_value = $request->category_permalink;
-        $category_permalink->save();
-
-        $posts_per_page = Option::where('option_name', 'posts_per_page')->first();
-        $posts_per_page->option_value = $request->posts_per_page;
-        $posts_per_page->save();
+        DB::table('options')->where('name', 'app_option')
+            ->update(['meta->posts_per_page' => $request->posts_per_page]);
 
         if ($request->users_can_register == 'on') {
-            $users_can_register = Option::where('option_name', 'users_can_register')->first();
-            $users_can_register->option_value = '1';
-            $users_can_register->save();
+
+            DB::table('options')->where('name', 'app_option')
+                ->update(['meta->users_can_register' => '1']);
+
         } else {
-            $users_can_register = Option::where('option_name', 'users_can_register')->first();
-            $users_can_register->option_value = '0';
-            $users_can_register->save();
+            DB::table('options')->where('name', 'app_option')
+                ->update(['meta->users_can_register' => '0']);
         }
         if ($request->users_can_comment == 'on') {
-            $users_can_comment = Option::where('option_name', 'users_can_comment')->first();
-            $users_can_comment->option_value = '1';
-            $users_can_comment->save();
+            DB::table('options')->where('name', 'app_option')
+                ->update(['meta->users_can_comment' => '1']);
         } else {
-            $users_can_comment = Option::where('option_name', 'users_can_comment')->first();
-            $users_can_comment->option_value = '0';
-            $users_can_comment->save();
+            DB::table('options')->where('name', 'app_option')
+                ->update(['meta->users_can_comment' => '0']);
         }
         if ($request->comment_registration == 'on') {
             if ($request->users_can_comment == 'on') {
-                $comment_registration = Option::where('option_name', 'comment_registration')->first();
-                $comment_registration->option_value = '1';
-                $comment_registration->save();
+                DB::table('options')->where('name', 'app_option')
+                    ->update(['meta->comment_registration' => '1']);
             }
         } else {
-            $comment_registration = Option::where('option_name', 'comment_registration')->first();
-            $comment_registration->option_value = '0';
-            $comment_registration->save();
+            DB::table('options')->where('name', 'app_option')
+                ->update(['meta->comment_registration' => '0']);
         }
         session()->flash('saved', 'تغییرات با موفقیت ذخیره شد.');
         return redirect()->route('options');
@@ -130,29 +112,18 @@ class OptionController extends Controller
             'mailserver_port' => 'required|numeric',
             'mailserver_encryption' => 'required|max:190',
         ]);
-        $admin_email = Option::where('option_name', 'admin_email')->first();
-        $admin_email->option_value = $request->admin_email;
-        $admin_email->save();
 
-        $mailserver_url = Option::where('option_name', 'mailserver_url')->first();
-        $mailserver_url->option_value = $request->mailserver_url;
-        $mailserver_url->save();
-
-        $mailserver_login = Option::where('option_name', 'mailserver_login')->first();
-        $mailserver_login->option_value = $request->mailserver_login;
-        $mailserver_login->save();
-
-        $mailserver_pass = Option::where('option_name', 'mailserver_pass')->first();
-        $mailserver_pass->option_value = $request->mailserver_pass;
-        $mailserver_pass->save();
-
-        $mailserver_port = Option::where('option_name', 'mailserver_port')->first();
-        $mailserver_port->option_value = $request->mailserver_port;
-        $mailserver_port->save();
-
-        $mailserver_encryption = Option::where('option_name', 'mailserver_encryption')->first();
-        $mailserver_encryption->option_value = $request->mailserver_encryption;
-        $mailserver_encryption->save();
+        DB::table('options')->where('name', 'app_email')
+            ->update(
+                [
+                    'meta->admin_email' => $request->admin_email,
+                    'meta->mailserver_url' => $request->mailserver_url,
+                    'meta->mailserver_login' => $request->mailserver_login,
+                    'meta->mailserver_pass' => $request->mailserver_pass,
+                    'meta->mailserver_port' => $request->mailserver_port,
+                    'meta->mailserver_encryption' => $request->mailserver_encryption,
+                ]
+            );
 
         session()->flash('saved', 'تغییرات با موفقیت ذخیره شد.');
         return redirect()->route('options.email');
