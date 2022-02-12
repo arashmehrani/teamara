@@ -23,11 +23,11 @@ class MediaFileService
             if ($private == true) {
                 $media->files = PrivateFileService::upload($file);
                 $media->type = 'private';
+                $media->private = true;
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->private = true;
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
             }
@@ -40,10 +40,10 @@ class MediaFileService
             case 'gif':
                 $media->files = ImageFileService::upload($file);
                 $media->type = 'image';
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
                 break;
@@ -54,10 +54,10 @@ class MediaFileService
             case '7z':
                 $media->files = ZipFileService::upload($file);
                 $media->type = 'zip';
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
                 break;
@@ -69,10 +69,10 @@ class MediaFileService
             case 'txt':
                 $media->files = DocFileService::upload($file);
                 $media->type = 'doc';
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
                 break;
@@ -84,10 +84,10 @@ class MediaFileService
             case 'avi':
                 $media->files = VideoFileService::upload($file);
                 $media->type = 'video';
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
                 break;
@@ -97,10 +97,10 @@ class MediaFileService
             case 'wav':
                 $media->files = AudioFileService::upload($file);
                 $media->type = 'audio';
+                $media->name = $file->getClientOriginalName();
                 $media->title = $request->title;
                 $media->description = $request->description;
                 $media->user_id = Auth::id();
-                $media->name = $file->getClientOriginalName();
                 $media->save();
                 return $media;
                 break;

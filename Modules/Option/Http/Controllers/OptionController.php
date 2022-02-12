@@ -53,6 +53,7 @@ class OptionController extends Controller
             'posts_per_page' => 'required|numeric',
         ]);
 
+
         DB::table('options')->where('name', 'app_general')
             ->update(
                 [
