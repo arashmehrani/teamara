@@ -3,7 +3,6 @@
 namespace Modules\Option\Providers;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Option\Entities\Option;
@@ -32,14 +31,15 @@ class OptionServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
-        if (Schema::hasTable('options')) {
+        if (Option::exists()) {
             $app_general = Option::where('name', 'app_general')->first();
             $site_name = $app_general->meta['site_name'];
 
             if (isset($site_name)) {
-                $app_email = Option::where('name', 'app_email')->first();
+
                 Config::set('app.name', $site_name);
 
+                $app_email = Option::where('name', 'app_email')->first();
                 $config = [
                     'driver' => 'smtp',
                     'host' => $app_email->meta['mailserver_url'],
@@ -53,8 +53,6 @@ class OptionServiceProvider extends ServiceProvider
                 ];
                 Config::set('mail', $config);
             }
-
-
         }
     }
 

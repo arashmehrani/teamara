@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Modules\Auth\Entities\User;
 use Nwidart\Modules\Facades\Module;
@@ -72,16 +71,16 @@ class InstallerController extends Controller
         Session::forget('oldData');
         Session::forget('noData');
 
-        if (Schema::hasColumn('users', 'updated_at')) {
+        if (User::exists()) {
 
-            // we have old database
+            // you have our old database
             Session::put('oldData', 'به نظر میرسد داده هایی از قبل برای این سایت وجود دارد');
             return redirect()->route('installer', ['step' => '2']);
 
         } else {
 
             // database is not ours
-            Session::put('noData', 'دیتابیس خالی و آمده نصب');
+            Session::put('noData', 'پایگاه داده خالی و آماده نصب است');
             return redirect()->route('installer', ['step' => '2']);
 
         }
