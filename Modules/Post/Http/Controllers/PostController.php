@@ -5,6 +5,7 @@ namespace Modules\Post\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Post\Entities\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post::index');
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        return view('post::posts', compact('posts'));
     }
 
     /**
@@ -23,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post::create');
+        return view('post::post-new');
     }
 
     /**

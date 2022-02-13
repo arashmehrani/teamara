@@ -17,6 +17,8 @@ use Modules\Post\Http\Controllers\PostController;
 Route::middleware(['connection','verified'])->prefix('dashboard')->group(function () {
 
     Route::get('/posts', [PostController::class, 'index'])->name('posts');
-    Route::get('/post/new', [PostController::class, 'new'])->name('post.new');
+    Route::get('/post/new', [PostController::class, 'create'])->name('post.new');
+    Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+    Route::delete('/post/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
 
 });
