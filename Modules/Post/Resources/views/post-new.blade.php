@@ -6,27 +6,41 @@
 
 @endsection
 @section('breadcrumb')
-    <h2 class="main-content-title tx-24 mg-b-5">افزودن نوشته</h2>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">داشبورد</a></li>
-        <li class="breadcrumb-item active" aria-current="page">افزودن نوشته</li>
-    </ol>
+    <h2 class="main-content-title tx-22 mg-b-5"> نوشتهٔ تازه </h2>
 @endsection
 
 @section('content')
     <div class="row row-sm">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 grid-margin">
+        <div class="col-sm-12 col-md-9 grid-margin">
+            <div class="card custom-card">
+                <form>
+                    <div class="card-header border-bottom-0 pb-0">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" id="title" placeholder="عنوان مطلب">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group mt-1">
+                            <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- COL END -->
+
+        <div class="col-sm-12 col-md-3 grid-margin">
             <div class="card custom-card">
                 <div class="card-header border-bottom-0 pb-0">
-
-
+                    انتشار
                 </div>
                 <div class="card-body">
-
+                    محتوا
                 </div>
             </div>
         </div><!-- COL END -->
+
     </div>
+
 @endsection
 @section('javaScript')
 
