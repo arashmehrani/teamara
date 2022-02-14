@@ -3,7 +3,8 @@
     <title>افزودن نوشته > {{config('app.name')}}</title>
 @endsection
 @section('css')
-
+    <script src="{{asset('CDN/admin/assets/plugins/ckeditor/ckeditor.js')}}" ></script>
+    <script src="{{asset('CDN/admin/assets/plugins/ckeditor/ckeditor-teamara.js')}}" ></script>
 @endsection
 @section('breadcrumb')
     <h2 class="main-content-title tx-22 mg-b-5"> نوشتهٔ تازه </h2>
@@ -20,9 +21,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group mt-1">
-                            <textarea class="form-control" name="content" id="content" rows="3"></textarea>
-                        </div>
+                            <div id="editor"></div>
                     </div>
                 </form>
             </div>
@@ -43,5 +42,11 @@
 
 @endsection
 @section('javaScript')
-
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

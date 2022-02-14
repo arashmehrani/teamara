@@ -22,7 +22,6 @@
     --teal: $ teal;
     --cyan: #00b9ff;
     --white: $ white;
-    --gray: $ secondary;
     --gray-dark: $ dark;
     --primary: $ primary;
     --secondary: $ secondary;
@@ -39,6 +38,10 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+}
+
+:root {
+    --gray: $ secondary;
 }
 
 *, :after, :before {
@@ -71864,4 +71867,8 @@ div.dtr-modal div.dtr-modal-close {
     .mapcontainer1 .map, .mapcontainer .map {
         width: auto
     }
+}
+
+.ck-editor__editable_inline {
+    min-height: 350px !important;
 }
