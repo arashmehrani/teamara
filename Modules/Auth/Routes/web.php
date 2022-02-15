@@ -11,7 +11,7 @@ Route::middleware(['connection'])->group(function () {
 
 // Auth Main Routes
     Route::get('/login', [\Modules\Auth\Http\Controllers\AuthController::class, 'loginView'])
-        ->middleware('guest')->name('login');
+        ->middleware('guest')->name('login')->middleware(['guest', 'throttle:10,1']);
     Route::get('/register', [AuthController::class, 'registerView'])
         ->middleware('guest')->name('register');
     Route::get('/logout', [AuthController::class, 'logout'])
