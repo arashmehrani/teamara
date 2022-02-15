@@ -24,6 +24,7 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all"
           href="{{asset('CDN/admin/assets/css-rtl/colors/color.css')}}">
     @yield('css')
+    @livewireStyles
 </head>
 
 <body class="main-body leftmenu">
@@ -64,5 +65,6 @@
     })
 </script>
 @yield('javaScript')
+@livewireScripts
 </body>
 </html>

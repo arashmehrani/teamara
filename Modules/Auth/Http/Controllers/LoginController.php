@@ -30,7 +30,7 @@ class LoginController extends Controller
         } else {
             session()->flash('notLogin', 'کاربری با این مشخصات پیدا نشد!');
         }
-        return redirect()->intended('login');
+
     }
 
     protected function redirectTo()

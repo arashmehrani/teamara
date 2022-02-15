@@ -30,6 +30,7 @@
         <div class="col-sm-12 col-md-3 grid-margin">
             <div class="card custom-card">
                 <div class="card-body">
+                    <form method="post">
                     <div class="d-flex mb-3">
                         <div class="">
                             <a href="#" class="btn btn-sm btn-outline-dark">ذخیره پیش‌نویس</a>
@@ -48,10 +49,10 @@
 
                     <div class="d-flex mt-3">
                         <div class="mr-auto my-auto">
-                            <a class="btn btn-primary" href="#">انتشار</a>
+                            <input type="submit" class="btn btn-primary" value="ثبت و انتشار">
                         </div>
                     </div>
-
+                    </form>
                 </div>
             </div>
 

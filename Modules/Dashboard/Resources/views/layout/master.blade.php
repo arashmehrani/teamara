@@ -28,6 +28,7 @@
     <link href="{{asset('CDN/admin/assets/css-rtl/sidemenu/sidemenu.css')}}" rel="stylesheet">
 
     @yield('css')
+    @livewireStyles
 </head>
 
 <body class="main-body leftmenu">
@@ -98,5 +99,6 @@
 <script src="{{asset('CDN/admin/assets/js/custom.js')}}"></script>
 
 @yield('javaScript')
+@livewireScripts
 </body>
 </html>
