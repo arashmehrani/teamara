@@ -48,6 +48,15 @@
                 {{ Session::get('status') }}
             </div>
         @endif
+        @if (Session::has('EmailNotSent'))
+            <div class="alert alert-warning" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert"
+                        type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ Session::get('EmailNotSent') }}
+            </div>
+        @endif
         <form wire:submit.prevent="login">
             @csrf
             <h5 class="text-right mb-2">به حساب خود وارد شوید</h5>
@@ -84,22 +93,23 @@
                     <span>مرا به خاطر بسپار</span>
                 </label>
             </div>
-            <button wire:loading.remove  class="btn ripple btn-main-primary btn-block">
+            <button wire:loading.remove class="btn ripple btn-main-primary btn-block">
                 ورود
             </button>
-            <button disabled wire:loading wire:target="login" class="btn ripple btn-main-primary btn-block" type="button">
+            <button disabled wire:loading wire:target="login" class="btn ripple btn-main-primary btn-block"
+                    type="button">
                 <span aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></span>
             </button>
-            </for>
-            <div class="text-right mt-5 ml-0">
-                <div class="mb-1"><a href="{{route('password.request')}}">رمز عبور خود را
-                        فراموش کرده اید؟</a>
-                </div>
-                @if($users_can_register == '1')
-                    <div>حساب ندارید؟ <a href="{{route('register')}}">اینجا ثبت نام
-                            کنید</a>
-                    </div>
-                @endif
+        </form>
+        <div class="text-right mt-5 ml-0">
+            <div class="mb-1"><a href="{{route('password.request')}}">رمز عبور خود را
+                    فراموش کرده اید؟</a>
             </div>
+            @if($users_can_register == '1')
+                <div>حساب ندارید؟ <a href="{{route('register')}}">اینجا ثبت نام
+                        کنید</a>
+                </div>
+            @endif
+        </div>
     </div>
 </div>

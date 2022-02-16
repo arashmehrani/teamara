@@ -34,48 +34,11 @@
                                         <h5 class="text-right mb-2">ثبت نام رایگان</h5>
                                         <p class="mb-4 text-muted tx-13 ml-0 text-right">ثبت نام رایگان است و فقط یک
                                             دقیقه طول می کشد.</p>
-                                        <form method="post">
-                                            @csrf
-                                            <div class="form-group text-right">
-                                                <label for="email">پست الکترونیک
-                                                    <span class="tx-danger">*</span>
-                                                </label>
-                                                <input name="email" id="email" class="form-control"
-                                                       placeholder="ایمیل خود را وارد کنید"
-                                                       type="email" value="{{old('email')}}" required>
-                                                @if ($errors->has('email'))
-                                                    <span class="text-danger">
-                                                        <small>{{ $errors->first('email') }}</small>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group text-right">
-                                                <label for="password">کلمه عبور
-                                                    <span class="tx-danger">*</span>
-                                                </label>
-                                                <input name="password" id="password" class="form-control"
-                                                       placeholder="رمز ورود خود را وارد کنید"
-                                                       type="password" required>
-                                                @if ($errors->has('password'))
-                                                    <span class="text-danger">
-                                                        <small>{{ $errors->first('password') }}</small>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <div class="form-group text-right">
-                                                <label for="mobile">موبایل <small>(اختیاری)</small></label>
-                                                <input name="mobile" id="mobile" class="form-control"
-                                                       placeholder="شماره موبایل" type="text" value="{{old('mobile')}}">
-                                                @if ($errors->has('mobile'))
-                                                    <span class="text-danger">
-                                                        <small>{{ $errors->first('mobile') }}</small>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            <button type="submit" class="btn ripple btn-main-primary btn-block">ایجاد
-                                                حساب
-                                            </button>
-                                        </form>
+
+
+                                        <livewire:auth::register />
+
+
                                         <div class="text-right mt-5 ml-0">
                                             <p class="mb-0">از قبل حساب کاربری دارید؟ <a
                                                     href="{{route('login')}}">وارد شوید</a></p>
