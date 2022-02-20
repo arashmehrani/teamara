@@ -14,23 +14,20 @@
     <div class="row row-sm">
         <div class="col-sm-12 col-md-9 grid-margin">
             <div class="card custom-card">
-                <form>
-                    <div class="card-header border-bottom-0 pb-0">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="title" id="title" placeholder="عنوان مطلب">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="editor"></div>
-                    </div>
-                </form>
+
+                <livewire:post::new-post />
+
+                <div class="card-body">
+                    <div id="editor"></div>
+                </div>
+
             </div>
         </div><!-- COL END -->
 
         <div class="col-sm-12 col-md-3 grid-margin">
             <div class="card custom-card">
                 <div class="card-body">
-                    <form method="post">
+
                     <div class="d-flex mb-3">
                         <div class="">
                             <a href="#" class="btn btn-sm btn-outline-dark">ذخیره پیش‌نویس</a>
@@ -52,7 +49,7 @@
                             <input type="submit" class="btn btn-primary" value="ثبت و انتشار">
                         </div>
                     </div>
-                    </form>
+
                 </div>
             </div>
 
