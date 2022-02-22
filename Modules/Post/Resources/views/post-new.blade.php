@@ -15,9 +15,10 @@
         <div class="col-sm-12 col-md-9 grid-margin">
             <div class="card custom-card">
 
+                <div class="card-body">
+
                 <livewire:post::new-post />
 
-                <div class="card-body">
                     <div id="editor"></div>
                 </div>
 

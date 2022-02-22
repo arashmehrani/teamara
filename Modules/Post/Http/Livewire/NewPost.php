@@ -7,7 +7,9 @@ use Livewire\Component;
 
 class NewPost extends Component
 {
-    public $title, $slug;
+    public $title, $slug, $newSlug;
+    public $ChangeSlug = false;
+
 
     public function render()
     {
@@ -16,6 +18,15 @@ class NewPost extends Component
 
     public function updatedTitle()
     {
-        $this->slug = Helpers::makeSlug($this->title);
+        if ($this->ChangeSlug == false) {
+            $this->slug = Helpers::makeSlug($this->title);
+        }
+
     }
+
+    public function ChangeSlug()
+    {
+        $this->ChangeSlug = true;
+    }
+
 }
