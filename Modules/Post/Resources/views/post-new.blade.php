@@ -3,8 +3,8 @@
     <title>افزودن نوشته > {{config('app.name')}}</title>
 @endsection
 @section('css')
-    <script src="{{asset('CDN/admin/assets/plugins/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{asset('CDN/admin/assets/plugins/ckeditor/ckeditor-teamara.js')}}"></script>
+    <link href="{{asset('CDN/admin/assets/plugins/summernote/summernote-bs4.min.css')}}" rel="stylesheet"/>
+
 @endsection
 @section('breadcrumb')
     <h2 class="main-content-title tx-22 mg-b-5"> نوشتهٔ تازه </h2>
@@ -17,9 +17,9 @@
 
                 <div class="card-body">
 
-                <livewire:post::new-post />
+                    <livewire:post::new-post/>
 
-                    <div id="editor"></div>
+                    <textarea id="summernote" name="content"></textarea>
                 </div>
 
             </div>
@@ -81,11 +81,27 @@
 
 @endsection
 @section('javaScript')
+    <script src="{{asset('CDN/admin/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <script src="{{asset('CDN/admin/assets/plugins/summernote/lang/summernote-fa-IR.js')}}"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                placeholder: 'محتوای مطلب ...',
+                tabsize: 2,
+                height: 300,
+                lang: 'fa-IR',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['height', ['height']],
+                    ['view', ['codeview']]
+                ]
             });
+        });
     </script>
 @endsection
